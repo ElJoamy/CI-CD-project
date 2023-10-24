@@ -44,33 +44,4 @@ jobs:
       run: pip install -r requirements.txt
 
     - name: Build application
-      run: python build.py
-  
-  deploy:
-    runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/heads/release/') || startsWith(github.ref, 'refs/heads/feature/')
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Setup Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-
-    - name: Deploy to Render
-      run: |
-        curl -X POST \
-          -H "Authorization: Bearer ${{ secrets.RENDER_TOKEN }}" \
-          -H "Content-Type: application/json" \
-          -d '{"name": "backend-API-python", "buildCommand": "python main.py", \
-          https://api.render.com/v1/services
-
-          # Reemplaza "your-app-name" con el nombre de tu aplicación en Render.
-          # Reemplaza "python build.py" con el comando de construcción de tu aplicación.
-          # Puedes agregar tus otras variables de entorno bajo "env".
-
+      run: python main.py
